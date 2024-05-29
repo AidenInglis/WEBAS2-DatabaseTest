@@ -16,3 +16,9 @@ try {
 } catch (e) {
     console.error(e);//Logs each error to the console.
 }
+
+//Get the Database Reference - MondoDB
+let db = connection.db('sample_db')
+
+//Export the database
+export default db;
