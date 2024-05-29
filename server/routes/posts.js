@@ -56,3 +56,13 @@ router.put('/post/:id', async (req, res) => {//Put request to update an existing
 
     res.send(result).status(200);//sends the status of the post we updated.
 });
+
+//Delete a Note from the database.
+router.delete('/post/:id', async (req, res) => {
+    const query = {_id: ObjectId(req.params.id)}//query set id to request id so we know what to delete.
+
+    const collection = db.collection('posts');//getting the Notes collection from mongodb.
+    let result = await collection.deleteOne(query);//this will delete the note with the id in the query.
+
+    res.send(result).status(200);//sends the status of the deleted Note.
+})
