@@ -25,3 +25,22 @@ router.get('/latest', async (req, res) => {//Get request to fetch the latest pos
     ]).toArray();
     res.send(results).status(200);
 });
+
+//Fetch a single post
+router.get('/:id', async (req, res) => {//Get request to fetch a single post.
+    let collection = await db.collection('posts');//getting the posts collection from mongodb.
+    let query = {_id: ObjectId(req.params.id)}//query sets the id of post to request id.
+    let results = await collection.findOne(query);//finds the post with id in the database.
+
+    if (!results) res.send("Post not found").status(404)
+        else res.send(result).status(200);
+});
+
+//Add a new post
+router.post('/', async (req, res) => {//Post request that adds a new note.
+    let collection = await db.collection('posts');//getting the posts collection from mongodb.
+    let newDocument = req.body;
+    let result = await collection.insertOne(newDocument);//inserts the new Doc into the collection.
+
+    res.send(results).status(204);
+});
