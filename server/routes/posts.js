@@ -66,3 +66,5 @@ router.delete('/post/:id', async (req, res) => {
 
     res.send(result).status(200);//sends the status of the deleted Note.
 })
+
+export default router;//Exporting the router.
