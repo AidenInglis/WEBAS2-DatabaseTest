@@ -44,3 +44,15 @@ router.post('/', async (req, res) => {//Post request that adds a new note.
 
     res.send(results).status(204);
 });
+
+//Update existing Note with new content.
+router.put('/post/:id', async (req, res) => {//Put request to update an existing note.
+    const query = {_id: ObjectId(req.params.id)}//query set id to request id.
+    const updates = {
+        $push: {content: req.body}
+    }
+    let collection = await db.collection('posts');//getting the posts collection from mongodb.
+    let results = await collection.updateOne(query, updates);//updates the post with new content.
+
+    res.send(result).status(200);//sends the status of the post we updated.
+});
